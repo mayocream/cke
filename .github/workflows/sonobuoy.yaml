@@ -23,6 +23,11 @@ jobs:
       - name: Run sonobuoy
         run: ./bin/run-sonobuoy.sh
         timeout-minutes: 240
+      - uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: e2e-check.log
+          path: /tmp/e2e-check.log
       - name: Check failures
         run: |
           grep "failed tests: 0" /tmp/e2e-check.log
